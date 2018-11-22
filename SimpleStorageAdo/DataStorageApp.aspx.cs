@@ -16,17 +16,7 @@ namespace SimpleStorageAdo
         string ConStr = ConfigurationManager.ConnectionStrings["CS"].ConnectionString;
         protected void Page_Load(object sender, EventArgs e)
         {
-            //string ConStr = "data source=.; database = project2; integrated security=SSPI";
-
-            //using (SqlConnection connection = new SqlConnection(ConStr))
-            //{
-            //    SqlCommand sqlCommand = new SqlCommand("Select * from products", connection);
-            //    //SqlDataReader dataReader = sqlCommand.ExecuteReader();
-            //    connection.Open();
-            //    GridView1.DataSource = sqlCommand.ExecuteReader();
-            //    GridView1.DataBind();
-            //    //ovoa na posebna strana(gore), kako lista od site. Drugoto na posebna
-            //}
+            
         }
 
         protected void Button1_Click1(object sender, EventArgs e)
@@ -46,14 +36,9 @@ namespace SimpleStorageAdo
         {
             using (SqlConnection connection = new SqlConnection(ConStr))
             {
-                //SqlCommand sqlCommand = new SqlCommand("spAddProduct", connection);
-                //sqlCommand.CommandType = CommandType.StoredProcedure;
-                string addItemwithunit = "insert into products ( ProductName, ProductUnit, Quantity ) values ( @ProductName, @ProductUnit, @Quantity )";
-                string addItemDefault = "insert into products( ProductName, Quantity ) values ( @ProductName, @Quantity )";
                 var text4 = TextBox4.Text.Trim();
-                if (TextBox2.Text.Trim() == string.Empty || text4 == string.Empty)//TextBox2.Text == null || TextBox2.Text == "" || TextBox4.Text == null || TextBox4.Text == ""
+                if (TextBox2.Text.Trim() == string.Empty || text4 == string.Empty)
                 {
-                    //MessageBox.Show("empty not allowed");
                     Page.Response.Redirect(Page.Request.Url.ToString(), false);
                 }
                 else if (TextBox2.Text.Trim().Length > 100 || TextBox3.Text.Trim().Length > 100 || text4.Length > 5)
@@ -64,19 +49,21 @@ namespace SimpleStorageAdo
                 {
                     Page.Response.Redirect(Page.Request.Url.ToString(), false);
                 }
-                else if (TextBox3.Text.Trim() == string.Empty/*TextBox3.Text.Trim() == null || TextBox3.Text,Trim() == ""*/)
+                else if (TextBox3.Text.Trim() == string.Empty)
                 {
-                    SqlCommand sqlCommand2 = new SqlCommand(addItemDefault, connection);
-                    sqlCommand2.Parameters.AddWithValue("@ProductName", TextBox2.Text);
+                    SqlCommand sqlCommand2 = new SqlCommand("spAddItemDefault", connection);
+                    sqlCommand2.CommandType = CommandType.StoredProcedure;
+                    sqlCommand2.Parameters.AddWithValue("@Name", TextBox2.Text);
                     sqlCommand2.Parameters.AddWithValue("@Quantity", TextBox4.Text);
                     connection.Open();
                     sqlCommand2.ExecuteReader();
                 }
                 else
                 {
-                    SqlCommand sqlCommand1 = new SqlCommand(addItemwithunit, connection);
-                    sqlCommand1.Parameters.AddWithValue("@ProductName", TextBox2.Text);
-                    sqlCommand1.Parameters.AddWithValue("@ProductUnit", TextBox3.Text);
+                    SqlCommand sqlCommand1 = new SqlCommand("spAddItemWithUnit", connection);
+                    sqlCommand1.CommandType = CommandType.StoredProcedure;
+                    sqlCommand1.Parameters.AddWithValue("@Name", TextBox2.Text);
+                    sqlCommand1.Parameters.AddWithValue("@Unit", TextBox3.Text);
                     sqlCommand1.Parameters.AddWithValue("@Quantity", TextBox4.Text);
                     connection.Open();
                     sqlCommand1.ExecuteReader();
@@ -85,20 +72,6 @@ namespace SimpleStorageAdo
             }
         }
     }
-    //protected void Button1_Click(object sender, EventArgs e)
-    //{
-    //    string ConStr = ConfigurationManager.ConnectionStrings["CS"].ConnectionString;
-
-    //    using (SqlConnection connection = new SqlConnection(ConStr))
-    //    {
-    //        string findNameButtonCmd = "select * from products where ProductName like @ProductName";
-    //        SqlCommand sqlCommand = new SqlCommand(findNameButtonCmd, connection);
-    //        sqlCommand.Parameters.AddWithValue("@ProductName", TextBox1.Text);
-    //        connection.Open();
-    //        GridView2.DataSource = sqlCommand.ExecuteReader();
-    //        GridView2.DataBind();
-    //    }
-    //}
 }
 
 /*create table products (

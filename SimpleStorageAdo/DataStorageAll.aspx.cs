@@ -17,7 +17,8 @@ namespace SimpleStorageAdo
         {
             using (SqlConnection connection = new SqlConnection(ConStr))
             {
-                SqlCommand sqlCommand = new SqlCommand("Select * from products", connection);
+                SqlCommand sqlCommand = new SqlCommand("spSelectAll", connection);
+                sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 connection.Open();
                 GridView1.DataSource = sqlCommand.ExecuteReader();
                 GridView1.DataBind();

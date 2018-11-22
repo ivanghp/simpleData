@@ -16,9 +16,7 @@
             <div class="col-sm-6">
             <asp:TextBox ID="TextBox1" runat="server"></asp:TextBox>
             <asp:Button ID="Button1" runat="server" Text="Button" OnClick="Button1_Click1" />
-            <%--<br />--%>
             <asp:GridView ID="GridView2" runat="server"></asp:GridView>
-            <%--<br />--%>
             </div>
             <div class="col-sm-6">
             <asp:GridView ID="GridView1" runat="server"></asp:GridView>
@@ -29,12 +27,7 @@
             <text>Unit</text><asp:TextBox ID="TextBox3" runat="server"></asp:TextBox>
             <text>Quantity</text><asp:TextBox ID="TextBox4" runat="server"></asp:TextBox>
             <asp:Button ID="Button2" runat="server" Text="Add" OnClick="Button2_Click" />
-            <%--<asp:UpdatePanel id="UpdatePanel1" runat="server" UpdateMode="Conditional">
-                <ContentTemplate>--%>
-                <%-- <asp:GridView ID="GridView3" runat="server"></asp:GridView>--%>
-                <%--</ContentTemplate>
-            </asp:UpdatePanel>--%>
-            <%--<asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>--%>
+            
         </div>
     </form>
     

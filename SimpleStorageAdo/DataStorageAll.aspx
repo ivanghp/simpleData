@@ -7,9 +7,11 @@
     <title></title>
 </head>
 <body>
+     <div style="width:100%">
+     <a href="DataStorageApp.aspx" style="float:right">Search or Add</a>
+    </div>
     <form id="form1" runat="server">
         <div>
-            <%--<asp:Repeater ID="Repeater1" runat="server"></asp:Repeater>--%>
             <asp:GridView ID="GridView1" runat="server"></asp:GridView>
         </div>
     </form>
